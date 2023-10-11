@@ -1,1 +1,4 @@
-# PO_2023_SRO1500_MIELECKI
+I. Bartłomiej Mielecki
+II. gr. 10 - środa 15:00
+III. Zębaty
+IV. https://gitexercises.fracz.com/committer/9cac359db2dd6b99bd6eaf622129da624a5af790
