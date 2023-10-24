@@ -6,7 +6,7 @@ public class World {
     public static void run(MoveDirection[] args){
         for(MoveDirection arg : args){
             String toSay = switch (arg){
-                case FORWARD -> "Zwierzak idzie to przodu";
+                case FORWARD -> "Zwierzak idzie do przodu";
                 case BACKWARD -> "Zwierzak idzie do tyłu";
                 case LEFT -> "Zwierzak skręca w lewo";
                 case RIGHT -> "Zwierzak skręca w prawo";
