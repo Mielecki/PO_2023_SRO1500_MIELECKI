@@ -5,16 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
-public class RandomPositionGenerator implements Iterable<Vector2d>{
-    int maxWidth;
-    int maxHeight;
-    int grassCount;
 
+public class RandomPositionGenerator implements Iterable<Vector2d>{
     ArrayList<Vector2d> positions = new ArrayList<Vector2d>();
     public RandomPositionGenerator(int maxWidth, int maxHeight, int grassCount){
         generateRandomPositions(maxWidth, maxHeight, grassCount);
     }
 
+    // Funkcja tworzy listę wszystkich pozycji, następnie miesza ją, a na końcu dodaje do listy kolejno odpowiednią ilość pozycji
     private void generateRandomPositions(int maxWidth, int maxHeight, int grassCount){
         ArrayList<Vector2d> positionsList = new ArrayList<Vector2d>();
 

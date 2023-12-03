@@ -40,4 +40,14 @@ public abstract class AbstractWorldMap implements WorldMap{
         animal.move(direction, this);
         animals.put(animal.getPosition(), animal);
     }
+
+    @Override
+    public Map<Vector2d, WorldElement> getElements(){
+        Map<Vector2d, WorldElement> elements = new HashMap<>();
+
+        for (Vector2d animal : animals.keySet()){
+            elements.put(animal, animals.get(animal));
+        }
+        return elements;
+    }
 }

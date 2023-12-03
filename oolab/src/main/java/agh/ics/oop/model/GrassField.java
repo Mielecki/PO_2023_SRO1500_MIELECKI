@@ -55,7 +55,16 @@ public class GrassField extends AbstractWorldMap {
                 vectorTop = vectorTop.upperRight(position);
             }
         }
-        assert vectorBottom != null; // tej funkcji nie rozumiem ale intellij mówi że przydatna
+
         return new MapVisualizer(this).draw(vectorBottom, vectorTop);
+    }
+
+    @Override
+    public Map<Vector2d, WorldElement> getElements(){
+        Map<Vector2d, WorldElement> elements = super.getElements();
+        for (Vector2d grass : grasses.keySet()){
+            elements.put(grass, grasses.get(grass));
+        }
+        return elements;
     }
 }
