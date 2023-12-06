@@ -1,7 +1,5 @@
 package agh.ics.oop.model;
 
-import agh.ics.oop.model.util.MapVisualizer;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,33 +28,26 @@ public class GrassField extends AbstractWorldMap {
         return grasses.get(position);
     }
 
-    @Override
-    public String toString(){
-        Vector2d vectorBottom = null;
-        Vector2d vectorTop = null;
-
+    private Vector2d setLowerLeft(){
+        Vector2d lowerLeft = new Vector2d(0, 0);
         for(Vector2d position : this.animals.keySet()){
-            if (vectorBottom == null){
-                vectorBottom = position;
-                vectorTop = position;
-            }
-            else {
-                vectorBottom = vectorBottom.lowerLeft(position);
-                vectorTop = vectorTop.upperRight(position);
-            }
+            lowerLeft = lowerLeft.lowerLeft(position);
         }
         for(Vector2d position : this.grasses.keySet()){
-            if (vectorBottom == null){
-                vectorBottom = position;
-                vectorTop = position;
-            }
-            else {
-                vectorBottom = vectorBottom.lowerLeft(position);
-                vectorTop = vectorTop.upperRight(position);
-            }
+            lowerLeft = lowerLeft.lowerLeft(position);
         }
+        return lowerLeft;
+    }
 
-        return new MapVisualizer(this).draw(vectorBottom, vectorTop);
+    private Vector2d setUpperRight(){
+        Vector2d upperRight = new Vector2d(0, 0);
+        for(Vector2d position : this.animals.keySet()){
+            upperRight = upperRight.upperRight(position);
+        }
+        for(Vector2d position : this.grasses.keySet()){
+            upperRight = upperRight.upperRight(position);
+        }
+        return upperRight;
     }
 
     @Override
@@ -66,5 +57,12 @@ public class GrassField extends AbstractWorldMap {
             elements.put(grass, grasses.get(grass));
         }
         return elements;
+    }
+
+    @Override
+    public Boundary getCurrentBounds(){
+        lowerLeft = setLowerLeft();
+        upperRight = setUpperRight();
+        return super.getCurrentBounds();
     }
 }

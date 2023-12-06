@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OptionsParserTest {
     @Test
@@ -29,13 +28,15 @@ public class OptionsParserTest {
                 Arrays.asList(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT, MoveDirection.RIGHT)
         );
         // then
-        assertEquals(OptionsParser.parse(args), result);
+        String[] finalArgs = args;
+        assertThrows(IllegalArgumentException.class, () -> {OptionsParser.parse(finalArgs);});
 
         // test 3 - all args are incorrect
         // given
         args = new String[] {"v", "ge", "ff"};
         result = new ArrayList<>();
         // then
-        assertTrue(OptionsParser.parse(args).equals(result));
+        String[] finalArgs2 = args;
+        assertThrows(IllegalArgumentException.class, () -> {OptionsParser.parse(finalArgs2);});
     }
 }

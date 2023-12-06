@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SimulationTest {
     @Test
-    public void SimulationRectangularMap(){
+    public void SimulationRectangularMap() throws PositionAlreadyOccupiedException{
         // test 1
         // given
         List<MoveDirection> directions = OptionsParser.parse(new String[] {"f", "b", "l", "r"});
@@ -73,7 +73,7 @@ public class SimulationTest {
         assertEquals(simulation.getAnimals().get(1).getPosition(), new Vector2d(3, 2));
     }
     @Test
-    public void SimulationGrassField(){
+    public void SimulationGrassField() throws PositionAlreadyOccupiedException{
         // test 1
         // given
         List<MoveDirection> directions = OptionsParser.parse(new String[] {"f", "b", "l", "r"});
@@ -126,5 +126,18 @@ public class SimulationTest {
 
         // then
         assertEquals(simulation.getAnimals().get(0).getPosition(), new Vector2d(3, 0));
+
+        // test 4 - place animals on same positions
+        directions = OptionsParser.parse(new String[] {"f", "f"});
+        positions = new ArrayList<>(Arrays.asList(new Vector2d(2, 2), new Vector2d(2, 2)));
+        GrassField map = new GrassField(5);
+
+        // when
+        simulation = new Simulation(positions, directions, map);
+        map.addObserver(new ConsoleClassDisplay());
+        simulation.run();
+
+        // then
+        assertEquals(simulation.getAnimals().get(0).getPosition(), new Vector2d(2, 4));
     }
 }
