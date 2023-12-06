@@ -8,6 +8,6 @@ public class ConsoleClassDisplay implements MapChangeListener{
         counter++;
         System.out.println(message);
         System.out.println(worldMap.toString());
-        System.out.println(counter);
+        System.out.println("Zmiana stanu nr: " + counter);
     }
 }

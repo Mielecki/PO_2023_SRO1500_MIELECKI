@@ -2,16 +2,14 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractWorldMap implements WorldMap{
     protected final Map<Vector2d, Animal> animals = new HashMap<>();
     protected Vector2d upperRight;
     protected Vector2d lowerLeft;
     protected List<MapChangeListener> observers = new ArrayList<>();
+    protected UUID id = UUID.randomUUID();
 
     public void addObserver(MapChangeListener observer){
         observers.add(observer);

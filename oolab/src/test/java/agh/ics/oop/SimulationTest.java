@@ -73,7 +73,7 @@ public class SimulationTest {
         assertEquals(simulation.getAnimals().get(1).getPosition(), new Vector2d(3, 2));
     }
     @Test
-    public void SimulationGrassField() throws PositionAlreadyOccupiedException{
+    public void SimulationGrassField(){
         // test 1
         // given
         List<MoveDirection> directions = OptionsParser.parse(new String[] {"f", "b", "l", "r"});
@@ -134,10 +134,10 @@ public class SimulationTest {
 
         // when
         simulation = new Simulation(positions, directions, map);
-        map.addObserver(new ConsoleClassDisplay());
         simulation.run();
 
         // then
         assertEquals(simulation.getAnimals().get(0).getPosition(), new Vector2d(2, 4));
+        assertEquals(simulation.getAnimals().size(), 1);
     }
 }
