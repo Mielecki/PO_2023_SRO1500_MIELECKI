@@ -4,6 +4,7 @@ import agh.ics.oop.model.util.MapVisualizer;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class RectangularMap extends AbstractWorldMap {
     private final int width;
@@ -12,6 +13,7 @@ public class RectangularMap extends AbstractWorldMap {
     public RectangularMap(int width, int height){
         this.width = width;
         this.height = height;
+        this.id = UUID.randomUUID();
     }
     @Override
     public boolean canMoveTo(Vector2d position) {
