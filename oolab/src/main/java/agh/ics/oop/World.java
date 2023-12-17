@@ -20,7 +20,7 @@ public class World {
     }
     public static void main(String [] args){
         try{
-            int simulationQuantity = 100;
+            int simulationQuantity = 1000;
             List<Simulation> simulations = new ArrayList<>();
             List<MoveDirection> directions = OptionsParser.parse(args);
             List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
@@ -32,11 +32,13 @@ public class World {
                 simulations.add(simulation);
             }
             SimulationEngine engine = new SimulationEngine(simulations);
-            engine.runAsync();
+            engine.runAsyncInThreadPool();
 
         }
         catch (IllegalArgumentException ex){
             System.out.println(ex.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         System.out.println("System zakończył działanie");
     }

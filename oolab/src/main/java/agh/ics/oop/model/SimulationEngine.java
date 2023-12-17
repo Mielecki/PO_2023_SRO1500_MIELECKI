@@ -27,33 +27,30 @@ public class SimulationEngine implements Runnable{
             Thread thread = new Thread(()-> simulation.run());
             threads.add(thread);
             thread.start();
-            awaitSimulationsEnd(thread);
+        }
+        for(Thread thread : threads){
+            try{
+                thread.join();
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
         }
     }
 
-    public void awaitSimulationsEnd(Thread thread){
-        try{
-            thread.join();
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
+    public void awaitSimulationsEnd(ExecutorService executorService) throws InterruptedException {
+        executorService.shutdown();
+        executorService.awaitTermination(10, TimeUnit.SECONDS);
     }
 
-    public void runAsyncInThreadPool(){
+    public void runAsyncInThreadPool() throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
         for (Simulation simulation : simulations){
             executorService.submit(()-> simulation.run());
         }
 
-        executorService.shutdown();
-
-        try {
-            executorService.awaitTermination(10, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        awaitSimulationsEnd(executorService);
     }
 
     @Override
