@@ -2,7 +2,6 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 
-import java.lang.reflect.GenericArrayType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,7 @@ public class World {
     }
     public static void main(String [] args){
         try{
-            int simulationQuantity = 1000;
+            int simulationQuantity = 1;
             List<Simulation> simulations = new ArrayList<>();
             List<MoveDirection> directions = OptionsParser.parse(args);
             List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
@@ -33,7 +32,6 @@ public class World {
             }
             SimulationEngine engine = new SimulationEngine(simulations);
             engine.runAsyncInThreadPool();
-
         }
         catch (IllegalArgumentException ex){
             System.out.println(ex.toString());
