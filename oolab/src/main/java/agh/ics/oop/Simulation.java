@@ -34,10 +34,15 @@ public class Simulation {
         int animalIndex = 0;
 
         for(MoveDirection move: moves){
-            Animal currAnimal = animals.get(animalIndex);
-            worldMap.move(currAnimal, move);
+            try {
+                Thread.sleep(500);
+                Animal currAnimal = animals.get(animalIndex);
+                worldMap.move(currAnimal, move);
 
-            animalIndex = (animalIndex + 1) % n;
+                animalIndex = (animalIndex + 1) % n;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

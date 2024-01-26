@@ -2,7 +2,6 @@ package agh.ics.oop.model;
 
 import agh.ics.oop.Simulation;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,19 +21,9 @@ public class SimulationEngine implements Runnable{
     }
 
     public void runAsync(){
-        List<Thread> threads = new ArrayList<>();
-        for (Simulation simulation : simulations){
-            Thread thread = new Thread(()-> simulation.run());
-            threads.add(thread);
+        for (Simulation simulation : simulations) {
+            Thread thread = new Thread(simulation::run);
             thread.start();
-        }
-        for(Thread thread : threads){
-            try{
-                thread.join();
-            }
-            catch (InterruptedException e){
-                e.printStackTrace();
-            }
         }
     }
 
