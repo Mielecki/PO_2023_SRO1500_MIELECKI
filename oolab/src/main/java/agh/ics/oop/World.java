@@ -2,6 +2,8 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 
+import java.lang.reflect.GenericArrayType;
+import java.util.ArrayList;
 import java.util.List;
 
 public class World {
@@ -17,16 +19,27 @@ public class World {
         }
     }
     public static void main(String [] args){
-        GrassField map = new GrassField(10);
         try{
+            int simulationQuantity = 1000;
+            List<Simulation> simulations = new ArrayList<>();
             List<MoveDirection> directions = OptionsParser.parse(args);
             List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
-            map.addObserver(new ConsoleClassDisplay());
-            Simulation simulation = new Simulation(positions, directions, map);
-            simulation.run();
+            ConsoleMapDisplay consoleMapDisplay = new ConsoleMapDisplay();
+            for (int i = 0; i < simulationQuantity; i++) {
+                GrassField map = new GrassField(10);
+                map.addObserver(consoleMapDisplay);
+                Simulation simulation = new Simulation(positions, directions, map);
+                simulations.add(simulation);
+            }
+            SimulationEngine engine = new SimulationEngine(simulations);
+            engine.runAsyncInThreadPool();
+
         }
         catch (IllegalArgumentException ex){
             System.out.println(ex.toString());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        System.out.println("System zakończył działanie");
     }
     }

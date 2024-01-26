@@ -2,12 +2,14 @@ package agh.ics.oop.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class GrassField extends AbstractWorldMap {
     private final Map<Vector2d, Grass> grasses = new HashMap<>();
 
     public GrassField(int grassCount){
         this.placeGrass(grassCount);
+        this.id = UUID.randomUUID();
     }
 
     public void placeGrass(int grassCount){

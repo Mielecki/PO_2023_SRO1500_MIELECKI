@@ -82,4 +82,9 @@ public abstract class AbstractWorldMap implements WorldMap{
         Boundary currentBounds = getCurrentBounds();
         return new MapVisualizer(this).draw(currentBounds.lowerLeft(), currentBounds.upperRight());
     }
+
+    @Override
+    public UUID getID() {
+        return id;
+    }
 }
